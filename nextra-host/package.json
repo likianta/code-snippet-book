@@ -2,10 +2,12 @@
     "name": "likianta-code-snippet-book",
     "version": "0.1.0",
     "description": "Craft your fancy works with the loved code snippets.",
+    "private": true,
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "deploy": "gh-pages -d out -t true"
     },
     "repository": {
         "type": "git",
@@ -23,6 +25,7 @@
     },
     "devDependencies": {
         "@types/node": "18.11.10",
+        "gh-pages": "^5.0.0",
         "typescript": "^4.9.3"
     }
 }
