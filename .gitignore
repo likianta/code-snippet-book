@@ -1,0 +1,7 @@
+/dumi-host/
+/mkdocs-host/
+/nextra-host/
+/nextra-host-(del)/
+
+.next/
+node_modules/
