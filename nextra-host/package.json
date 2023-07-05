@@ -1,28 +1,28 @@
 {
-  "name": "likianta-code-snippet-book",
-  "version": "0.1.0",
-  "description": "Craft your fancy works with the loved code snippets.",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/likianta/code-snippet-book.git"
-  },
-  "author": "Shu Ding <g@shud.in>",
-  "homepage": "https://github.com/likianta/code-snippet-book",
-  "dependencies": {
-    "next": "^13.4.8",
-    "nextra": "^2.8.0",
-    "nextra-theme-docs": "^2.8.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sharp": "^0.32.1"
-  },
-  "devDependencies": {
-    "@types/node": "18.11.10",
-    "typescript": "^4.9.3"
-  }
+    "name": "likianta-code-snippet-book",
+    "version": "0.1.0",
+    "description": "Craft your fancy works with the loved code snippets.",
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/likianta/code-snippet-book.git"
+    },
+    "author": "Shu Ding <g@shud.in>",
+    "homepage": "https://likianta.github.io/code-snippet-book/",
+    "dependencies": {
+        "next": "^13.4.8",
+        "nextra": "^2.8.0",
+        "nextra-theme-docs": "^2.8.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "sharp": "^0.32.1"
+    },
+    "devDependencies": {
+        "@types/node": "18.11.10",
+        "typescript": "^4.9.3"
+    }
 }
