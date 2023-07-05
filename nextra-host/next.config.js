@@ -1,6 +1,8 @@
 // ref: https://github.com/whitebit-exchange/api-docs/blob/main/next.config.js
 
 const withNextra = require('nextra')({
+    defaultShowCopyCode: true,
+    staticImage: true,
     theme: 'nextra-theme-docs',
     themeConfig: './theme.config.tsx',
 });
@@ -16,6 +18,7 @@ module.exports = {
         unoptimized: true,
     },
     output: 'export',
+    reactStrictMode: true,
     rewrites: null,
     swcMinify: true,
     trailingSlash: true,
