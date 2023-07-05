@@ -17,9 +17,9 @@ const nextConfig = {
     images: {
         unoptimized: true,
     },
-    output: 'export',
+    // output: 'export',
     reactStrictMode: true,
-    rewrites: null,
+    // rewrites: null,
     swcMinify: true,
     trailingSlash: true,
 };
