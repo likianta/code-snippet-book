@@ -8,13 +8,11 @@ const withNextra = require('nextra')({
 // module.exports = withNextra;
 module.exports = {
     ...withNextra(),
-    // assetPrefix: '',
-    // basePath: '',
-    distDir: '../dist',
+    distDir: '../docs',
     images: {
         unoptimized: true,
     },
     output: 'export',
     rewrites: null,
-    trailingSlash: false,
+    trailingSlash: true,
 };
