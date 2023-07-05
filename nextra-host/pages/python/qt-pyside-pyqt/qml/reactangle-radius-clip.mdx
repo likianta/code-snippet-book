@@ -1,0 +1,18 @@
+# Rectangle Radius Clip
+
+```qml
+import QtQuick
+import Qt5Compat.GraphicalEffects
+
+Rectangle {
+    id: _rect
+    layer.enabled: true
+    layer.effect: OpacityMask {
+        maskSource: Rectangle {
+            width: _rect.width
+            height: _rect.height
+            radius: _rect.radius
+        }
+    }
+}
+```

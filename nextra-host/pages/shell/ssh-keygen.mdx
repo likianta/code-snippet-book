@@ -1,0 +1,58 @@
+# 使用 SSH-Keygen 生成 SSH 密钥
+
+## Windows
+
+第一步, 生成 ssh 公钥和私钥.
+
+```shell
+ssh-keygen -t rsa
+  # 接下来进入交互式步骤
+    # 1. 询问要保存的位置, 建议使用默认位置 (c:/users/<username>/.ssh), 这样 
+    #    github desktop 可以自动识别
+    # 2. 询问是否输入密码, 可以留空
+  # 完成后, 会出现一张随机字符画:
+    # +---[RSA 3072]----+
+    # |+.*=o.++         |
+    # |.o.=o.++         |
+    # |. . .oo.o .      |
+    # |o . . .. + o   . |
+    # |.o.= .o S . . + .|
+    # | oo++= +   . + o |
+    # | .oo= + .   . E  |
+    # |  +o             |
+    # | ....            |
+    # +----[SHA256]-----+
+```
+
+上述步骤完成后, 在 `c:/users/<username>/.ssh` 目录下会出现 "id_rsa" 和 "id_rsa.pub" 文件.
+
+"id_rsa.pub" 是公钥. 将它用记事本打开, 全选并复制.
+
+来到 github 或者 gitlab 的设置 - ssh 管理页面, 添加 ssh key.
+
+## macOS
+
+生成步骤和 windows 一样:
+
+```shell
+ssh-keygen -t rsa
+```
+
+注意生成的 ssh 文件位于用户目录下的隐藏文件夹: `~/.ssh`.
+
+拷贝 `~/.ssh/id_rsa.pub` 中的内容:
+
+```shell
+pbcopy < ~/.ssh/id_rsa.pub
+# 或者直接用记事本打开该文件, 全选复制.
+```
+
+之后是粘贴, 和 windows 一样.
+
+## 参考
+
+- https://zhongguo.eskere.club/%E5%A6%82%E4%BD%95%E5%9C%A8-mac-%E4%B8%8A%E4%BD%BF%E7%94%A8-ssh-keygen-%E7%94%9F%E6%88%90-ssh-%E5%AF%86%E9%92%A5/2021-09-19/
+
+## 注意事项
+
+github desktop 务必在设置中开启 "use system openssh" 选项.

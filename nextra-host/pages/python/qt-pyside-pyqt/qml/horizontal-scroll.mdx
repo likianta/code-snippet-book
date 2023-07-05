@@ -1,0 +1,25 @@
+# Flickable/ListView Horizontal Scroll
+
+```qml
+import QtQuick
+import QtQuick.Controls
+
+Flickable {
+    id: root
+
+    flickableDirection: Flickable.HorizontalFlick
+    ScrollIndicator.horizontal: ScrollIndicator { }
+
+    // fix the way to scroll by mouse wheel event
+    // ref: https://stackoverflow.com/questions/61889210/how-to-make-qt5-qml
+    //  -horizontal-listview-enable-mouse-scroll
+    MouseArea {
+        anchors.fill: parent
+        onWheel: (wheel) => {
+            root.flick(wheel.angleDelta.y, 0)
+            // root.flick(wheel.angleDelta.y * 10, 0)
+            wheel.accepted = true
+        }
+    }
+}
+```
