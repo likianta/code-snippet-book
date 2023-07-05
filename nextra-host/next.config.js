@@ -5,9 +5,9 @@ const withNextra = require('nextra')({
     themeConfig: './theme.config.tsx',
 });
 
-// const isProduction = process.env.NODE_ENV === 'production';
-// const assetPrefix = isProduction ? '/code-snippet-book' : '';
-const assetPrefix = '';
+const isProduction = process.env.NODE_ENV === 'production';
+const assetPrefix = isProduction ? '/code-snippet-book' : '';
+// const assetPrefix = '';
 
 // module.exports = withNextra;
 module.exports = {
