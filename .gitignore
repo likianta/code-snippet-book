@@ -1,6 +1,9 @@
+/build/
+/dist/
 /dumi-host/
 /mkdocs-host/
 /nextra-host/.next/
+/nextra-host/out/
 
 .idea/
 .vscode/
