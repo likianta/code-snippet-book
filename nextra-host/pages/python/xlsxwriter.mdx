@@ -1,0 +1,20 @@
+# XlsxWriter
+
+## Simple
+
+```py
+from xlsxwriter.workbook import Workbook
+from xlsxwriter.workbook import Worksheet
+
+book: Workbook = Workbook(
+    filename=...,
+    options={'strings_to_numbers': True}
+)
+sheet: Worksheet = book.add_worksheet('sheet-1')
+...
+book.close()
+```
+
+## Create plot
+
+...

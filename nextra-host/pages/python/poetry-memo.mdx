@@ -1,0 +1,41 @@
+# Poetry 备忘
+
+## 设置清华源
+
+```toml
+[[tool.poetry.source]]
+name = 'tsinghua'
+url = 'https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/'
+priority = 'default'
+```
+
+## 添加可选依赖
+
+> - https://python-poetry.org/docs/pyproject#extras
+> - https://stackoverflow.com/questions/46775346/what-do-square-brackets-mean-in-pip-install
+
+```toml
+[tool.poetry.dependencies]
+pypinyin = { version = "*", optional = true }
+xlrd = { version = "1.2.0", optional = true }
+xlsxwriter = { version = "*", optional = true }
+
+[tool.poetry.extras]
+exl = ["xlrd", "xlsxwriter"]
+nlp = ["pypinyin"]
+```
+
+```sh
+pip install "my-package[nlp]"
+pip install "my-package[exl]"
+```
+
+## 添加特定平台/版本的依赖
+
+下面描述的是一些经典的案例.
+
+```toml
+[tool.poetry.dependencies]
+pyside6 = { version = ">=6.4.0,!=6.5.0", python = "<3.12"}
+typing_extensions = { version = "*", python = "<3.11" }
+```

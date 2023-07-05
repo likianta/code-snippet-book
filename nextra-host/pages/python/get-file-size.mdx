@@ -1,0 +1,16 @@
+# Get File Size
+
+```py
+import os
+
+def get_file_size(path: str) -> int:
+    return os.path.getsize(file_path)
+
+def get_file_size_str(path: str) -> str:
+    size = float(get_file_size(path))
+    for unit in ('B', 'KB', 'MB', 'GB', 'TB'):
+        if size < 1024:
+            return f'{size:.2f}{unit}'
+        size /= 1024
+    return f'{size:.2f}PB'
+```

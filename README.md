@@ -1,5 +1,9 @@
 # Likianta Code Snippet Book
 
+## Motivation
+
+this is mainly for showing something via **[Nextra](https://nextra.site/)** site generator. visit the deployed site effect [here](https://likianta.github.io/code-snippet-book).
+
 ## Development
 
 ```sh

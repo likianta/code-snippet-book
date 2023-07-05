@@ -1,0 +1,18 @@
+# Hash File Content
+
+```py
+import hashlib
+import os
+
+def get_file_hash(path: str) -> str:
+    """
+    if file is too large, read the first 8192 bytes
+    """
+    with open(path, 'rb') as file:
+        md5 = hashlib.md5()
+        if os.path.getsize(path) > 8192:
+            md5.update(file.read(8192))
+        else:
+            md5.update(file.read())
+    return md5.hexdigest()
+```

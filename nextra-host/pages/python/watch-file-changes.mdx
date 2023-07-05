@@ -1,0 +1,53 @@
+# Watch File Changes And Do Something
+
+> https://dev.to/stokry/monitor-files-for-changes-with-python-1npj
+
+## Requirements
+
+- lk-utils
+- watchdog >= 3.0
+
+## Code
+
+```py
+import typing as t
+from time import sleep
+
+from lk_utils import fs
+from watchdog.events import FileModifiedEvent
+from watchdog.events import FileSystemEventHandler
+from watchdog.observers import Observer
+
+
+def on_file_change(filepath: str, callback: t.Callable) -> None:
+    observer = Observer()
+    handler = FileEventHandler(filepath, callback)
+    observer.schedule(handler, fs.parent(filepath), recursive=False)
+    _polling(observer)
+
+
+class FileEventHandler(FileSystemEventHandler):
+    def __init__(self, filepath: str, callback: t.Callable) -> None:
+        super().__init__()
+        self._filepath = fs.normpath(filepath, True)
+        self._callback = callback
+
+    def on_modified(self, event: FileModifiedEvent) -> None:
+        # print(event.src_path)
+        if not event.is_directory:
+            if event.src_path == self._filepath:
+                self._callback()
+
+
+def _polling(observer: Observer) -> None:
+    print("start polling. you can press `ctrl + c` to stop it.")
+    observer.start()
+    try:
+        while True:
+            sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+        print("watchdog stopped")
+    finally:
+        observer.join()
+```
