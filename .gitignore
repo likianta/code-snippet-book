@@ -1,7 +1,10 @@
 /dumi-host/
 /mkdocs-host/
-/nextra-host/
-/nextra-host-(del)/
+/nextra-host/.next/
 
-.next/
+.idea/
+.vscode/
+__pycache__/
 node_modules/
+
+*.b64.html
