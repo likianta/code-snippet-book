@@ -44,7 +44,7 @@ const config: DocsThemeConfig = {
     },
     docsRepositoryBase: 'https://github.com/likianta/code-snippet-book',
     footer: {
-        text: 'Powered by Nextra',
+        text: 'Made by Likiata, powered by Nextra',
     },
 };
 

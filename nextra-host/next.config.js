@@ -1,6 +1,6 @@
-// ref: https://github.com/whitebit-exchange/api-docs/blob/main/next.config.js
+// ref: https://github.com/mkrtchian/reading-notes/blob/main/next.config.js
 
-const withNextra = require('nextra')({
+const nextraConfig = require('nextra')({
     defaultShowCopyCode: true,
     staticImage: true,
     theme: 'nextra-theme-docs',
@@ -10,10 +10,10 @@ const withNextra = require('nextra')({
 const isProduction = process.env.NODE_ENV === 'production';
 const assetPrefix = isProduction ? '/code-snippet-book' : '';
 
-module.exports = {
-    ...withNextra(),
+const nextConfig = {
+    assetPrefix: assetPrefix,
     basePath: assetPrefix,
-    distDir: '../docs',
+    // distDir: '../docs',
     images: {
         unoptimized: true,
     },
@@ -22,4 +22,9 @@ module.exports = {
     rewrites: null,
     swcMinify: true,
     trailingSlash: true,
+};
+
+module.exports = {
+    ...nextraConfig(),
+    ...nextConfig,
 };
