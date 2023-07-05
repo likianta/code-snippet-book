@@ -1,0 +1,50 @@
+# Bore FRP (内网穿透工具)
+
+## Download
+
+official releases (binary file): https://github.com/ekzhang/bore/releases
+
+```sh
+cd {download_dir}
+curl -L -o bore.tar.gz https://github.com/ekzhang/bore/releases/download/v0.4.1/bore-v0.4.1-x86_64-unknown-linux-musl.tar.gz
+tar -xf bore.tar.gz
+```
+
+## Deploy
+
+```sh
+mkdir -p {apps_dir}/bore-frp
+mv bore {apps_dir}/bore-frp
+```
+
+编辑 `~/.zshrc`, 新增:
+
+```sh
+export PATH="{apps_dir}/bore-frp:$PATH"
+```
+
+测试:
+
+```sh
+bore -h
+```
+
+## Run
+
+```sh
+bore server -s {password}
+```
+
+run in background:
+
+```sh
+# https://blog.csdn.net/u010889390/article/details/50575345
+# https://juejin.cn/post/6844903865282265101
+nohup bore server -s {password} /dev/null 2>&1 &
+```
+
+## Connect (Client)
+
+```sh
+bore client -s {password} -t {ip} -p {remote_port} {local_port}
+```

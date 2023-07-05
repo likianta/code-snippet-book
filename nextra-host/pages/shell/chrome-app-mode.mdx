@@ -1,0 +1,90 @@
+# 使用 Chrome App Mode 将网页转换为桌面应用
+
+> 关键词: chrome-app-mode app-standalone webpage-to-desktop-app chrome-spa webview
+
+## 快速演示
+
+下面的命令是快速演示, 你可以复制该命令, 在命令行中直接打开看效果.
+
+### Windows
+
+...
+
+### macOS
+
+```sh
+'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --app='http://baidu.com' --window-size=800,600 --window-position=560,240 --user-data-dir='/tmp/chrome-app-mode-test'
+```
+
+### 截图
+
+...
+
+## 命令格式
+
+```sh
+<chrome_app> \
+	--app=<url> \
+    --window-size=<width>,<height> \
+    --window-position=<x>,<y> \
+    --user-data-dir=<any_temp_directory>
+```
+
+注意事项: 
+
+- 要想让 `--window-size` 或 `--window-position` 生效, 必须定义 `--user-data-dir` 参数. 
+	- ps: 网上有人说把 `--user-data-dir=...` 替换成 `--chrome-frame` 也行, 但本人测试不生效.
+- 如果不指定 `--window-position=<x>,<y>`, 则默认打开时位于屏幕左上角. 如需让打开时居中, 请继续阅读下面的章节.
+
+### 让 App 启动后位于屏幕中央
+
+**公式:** 
+
+```py
+# center_window.py
+
+def get_app_pos(
+        screen_size: tuple[int, int],
+        app_size: tuple[int, int] = (800, 600)
+) -> tuple[int, int]:
+    w0, h0 = screen_size
+    w1, h1 = app_size
+    x = int((w0 - w1) / 2)
+    y = int((h0 - h1) / 2)
+    print('--------------------------')
+    print(f' screen size: {w0:>4} | {h0:<4}')
+    print(f'    app size: {w1:>4} | {h1:<4}')
+    print(f'     app pos: {x:>4} | {y:<4}')
+    return x, y
+
+if __name__ == '__main__':
+    get_app_pos((1280, 720))
+    get_app_pos((1920, 1080))
+    get_app_pos((2560, 1440))
+    get_app_pos((3840, 2160))
+```
+
+代码运行截图:
+
+...
+
+**快速参考表:** 
+
+(假设 app 大小为 800 x 600.)
+
+| screen size | app position |
+| ----------- | ------------ |
+| 1920 x 1080 | 560,240      |
+| 2560 x 1440 | 880,420      |
+...
+
+## 遗留问题
+
+- 关闭 app 不能彻底结束进程. 你需要在命令行中按 `ctrl + c` 强制停止.
+- 在 macos 中, nushell 不能使用上述方法. 你需要先退出 nushell.
+
+## 参考链接
+
+- https://gist.github.com/arkadiusjonczek/8836e724a53ddd55362644745cf8ca4c
+- https://stackoverflow.com/a/19789383
+- https://stackoverflow.com/a/26962811

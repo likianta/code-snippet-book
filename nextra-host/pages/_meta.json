@@ -6,5 +6,9 @@
     "python": {
         "title": "Python",
         "type": "page"
+    },
+    "shell": {
+        "title": "Shell",
+        "type": "page"
     }
 }

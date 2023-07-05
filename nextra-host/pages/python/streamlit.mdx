@@ -1,0 +1,63 @@
+# Streamlit
+
+## 命令行
+
+```sh
+# alias st="streamlit"
+
+streamlit run --help
+# run and open browser
+streamlit run {script}
+# do not open browser
+streamlit run --server.headless true {script}
+# run on localhost
+streamlit run --server.headless true --server.address localhost --server.port {port} {script}
+```
+
+注意:
+
+不能使用 3000 作为 port! 这看起来是一个 bug ([issue](https://github.com/streamlit/streamlit/issues/4921#issuecomment-1383197014)).
+
+## 调整 Button 宽度
+
+> https://discuss.streamlit.io/t/button-size-in-sidebar/36132/2
+
+```py
+import streamlit as st
+
+st.markdown('''
+    <style>
+        section[data-testid="stSidebar"] div.stButton button {
+            width: 20rem;
+        }
+    </style>
+''', unsafe_allow_html=True)
+
+with st.sidebar:
+    st.button('One')
+    st.button('Two')
+    st.button('Three')
+    st.button('Four')
+```
+
+## 在前端打印日志
+
+> keywords: console log logger print terminal
+
+```py
+import lk_logger  # pip install lk-logger
+import streamlit as st
+
+if 'log' not in st.session_state:
+    st.session_state['log'] = []
+
+with st.container():
+    st.write('\n\n'.join(st.session_state['log']))
+
+# notice: session modification must be in main thread!
+lk_logger.update(async_=False)
+lk_logger.lk.add_pipe(st.session_state['log'].append)
+
+print('hello')
+print('world')
+```
