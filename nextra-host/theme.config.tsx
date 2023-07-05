@@ -1,31 +1,10 @@
 import React from 'react';
 import { DocsThemeConfig } from 'nextra-theme-docs';
-
-const isProduction = process.env.NODE_ENV === 'production';
-const assetPrefix = isProduction ? '/code-snippet-book' : '';
+import { Logo } from './components/logo';
+import { assetPrefix } from './config/constants';
 
 const config: DocsThemeConfig = {
-    logo: (
-        <>
-            <img
-                src={`${assetPrefix}/favicon/favicon-16x16.png`}
-                style={{ marginBottom: 2 }}
-            />
-            <span style={{ marginLeft: 8 }}>
-                {/* gradient text: https://www.jianshu.com/p/3a5bbfbf5957 */}
-                <b
-                    style={{
-                        backgroundImage:
-                            'linear-gradient(to right, #cb3f49, purple)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                    }}
-                >
-                    LK CS Book
-                </b>
-            </span>
-        </>
-    ),
+    logo: <Logo />,
     head: (
         <>
             <meta
