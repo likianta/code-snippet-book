@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "code-snippet-book"
+version = "0.1.0"
+description = ""
+authors = ["likianta <likianta@foxmail.com>"]
+readme = "README.md"
+packages = [{include = "code_snippet_book"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+argsense = { url = "http://localhost:2006/argsense/argsense-1.0.0a16-py3-none-any.whl" }
+lk-logger = { url = "http://localhost:2006/lk-logger/lk_logger-5.7.0a3-py3-none-any.whl" }
+lk-utils = { url = "http://localhost:2006/lk-utils/lk_utils-2.6.0b2-py3-none-any.whl" }
+
+[[tool.poetry.source]]
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "default"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

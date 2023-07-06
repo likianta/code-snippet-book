@@ -1,5 +1,3 @@
-import MySourceCode from '!!raw-loader!./_assets/122928.py';
-
 # Get Function Source
 
 ## Requirements
@@ -15,11 +13,17 @@ optional (for test):
 
 `get_func_source.py`:
 
+{/* $py.embed_codeblock('./_assets/122928.py') */}
+{/* [BOT_MESSAGE] embed source file. updated at 2023-07-06 17:45:30 */}
+
 ```py
 import ast
 import inspect
-from astunparse import unparse
+import typing as t
 from types import FunctionType
+
+from astunparse import unparse
+
 
 def get_source(
         func: FunctionType,
@@ -32,11 +36,13 @@ def get_source(
     notice: if either `strip_decorators` or `strip_signature` is True, the
         output code may slightly changed by removing *unnecessary* line breaks.
     """
+    body: t.List[ast.stmt]
     code: str
-    module: ast.Module
-    ...
-
-    code: str = inspect.getsource(func)
+    module: t.Union[ast.AST, ast.Module]
+    out: str
+    target_func: t.Union[ast.stmt, ast.FunctionDef]
+    
+    code = inspect.getsource(func)
     if strip_decorators or strip_signature:
         module = ast.parse(code)
         target_func = module.body[0]
@@ -45,8 +51,8 @@ def get_source(
         if strip_return:
             # FIXME: support only stripping final-line return
             if target_func.body and isinstance(
-                target_func.body[-1],
-                ast.Return
+                    target_func.body[-1],
+                    ast.Return
             ):
                 target_func.body.pop()
         if strip_signature:
@@ -58,6 +64,8 @@ def get_source(
         out = code
     return out.strip()
 ```
+
+{/* $py.end */}
 
 ## Test
 
@@ -96,4 +104,4 @@ if __name__ == '__main__':
 
 the output:
 
-![](./_assets/120721.png)
+![](./_assets/120721.png "output")
