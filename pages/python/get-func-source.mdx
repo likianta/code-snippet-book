@@ -1,13 +1,15 @@
+import MySourceCode from '!!raw-loader!./_assets/122928.py';
+
 # Get Function Source
 
 ## Requirements
 
-- astunparse
+-   astunparse
 
 optional (for test):
 
-- astpretty
-- lk-logger
+-   astpretty
+-   lk-logger
 
 ## Code
 
@@ -17,18 +19,23 @@ optional (for test):
 import ast
 import inspect
 from astunparse import unparse
+from types import FunctionType
 
 def get_source(
-        func, 
-        strip_decorators=True, 
-        strip_signature=False,  # aka. body_only
-        strip_return=False,
+        func: FunctionType,
+        strip_decorators: bool = True,
+        strip_signature: bool = False,  # aka. body_only
+        strip_return: bool = False,
 ) -> str:
     """
     https://stackoverflow.com/a/57040815
-    notice: if either `strip_decorators` or `strip_signature` is True, the 
+    notice: if either `strip_decorators` or `strip_signature` is True, the
         output code may slightly changed by removing *unnecessary* line breaks.
     """
+    code: str
+    module: ast.Module
+    ...
+
     code: str = inspect.getsource(func)
     if strip_decorators or strip_signature:
         module = ast.parse(code)
@@ -38,7 +45,7 @@ def get_source(
         if strip_return:
             # FIXME: support only stripping final-line return
             if target_func.body and isinstance(
-                target_func.body[-1], 
+                target_func.body[-1],
                 ast.Return
             ):
                 target_func.body.pop()

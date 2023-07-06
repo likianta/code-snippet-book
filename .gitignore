@@ -1,13 +1,17 @@
+/.idea/
+/.next/
+/.vscode/
 /build/
 /dist/
 /dumi-host/
 /mkdocs-host/
-/nextra-host/out/
+/node_modules/
+/out/*
+/temp/
 
-.idea/
-.next/
-.vscode/
 __pycache__/
-node_modules/
 
+.DS_Store
 *.b64.html
+
+!/out/.nojekyll
