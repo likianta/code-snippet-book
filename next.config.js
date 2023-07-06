@@ -13,13 +13,13 @@ const assetPrefix = isProduction ? '/code-snippet-book' : '';
 const nextConfig = {
     assetPrefix: assetPrefix,
     basePath: assetPrefix,
-    // distDir: '../docs',
+    // distDir: 'docs',
     images: {
         unoptimized: true,
     },
-    // output: 'export',
+    output: 'export',
     reactStrictMode: true,
-    // rewrites: null,
+    rewrites: null,
     swcMinify: true,
     trailingSlash: true,
 };
