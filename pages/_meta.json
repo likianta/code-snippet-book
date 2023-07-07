@@ -7,6 +7,10 @@
         "title": "Python",
         "type": "page"
     },
+    "frontend": {
+        "title": "Frontend",
+        "type": "page"
+    },
     "shell": {
         "title": "Shell",
         "type": "page"
