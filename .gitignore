@@ -1,10 +1,6 @@
-/.idea/
-/.next/
-/.vscode/
+/.*/
 /build/
 /dist/
-/dumi-host/
-/mkdocs-host/
 /node_modules/
 /out/*
 /temp/
