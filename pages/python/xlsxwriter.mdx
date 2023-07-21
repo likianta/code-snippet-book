@@ -8,7 +8,13 @@ from xlsxwriter.workbook import Worksheet
 
 book: Workbook = Workbook(
     filename=...,
-    options={'strings_to_numbers': True}
+    options={
+        'strings_to_numbers': True,
+        'default_format_properties': {
+            'font_name': 'Arial',
+            'font_size': 11,
+        }
+    }
 )
 sheet: Worksheet = book.add_worksheet('sheet-1')
 ...

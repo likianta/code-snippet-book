@@ -47,3 +47,10 @@ pip install "my-package[exl]"
 pyside6 = { version = ">=6.4.0,!=6.5.0", python = "<3.12"}
 typing_extensions = { version = "*", python = "<3.11" }
 ```
+
+## 创建可执行脚本
+
+```toml
+[tool.poetry.scripts]
+depsland = 'depsland.__main__:_run_cli'
+```
