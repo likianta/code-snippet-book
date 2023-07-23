@@ -1,6 +1,7 @@
 import ast
 import inspect
 import typing as t
+from textwrap import dedent
 from types import FunctionType
 
 from astunparse import unparse
@@ -38,7 +39,7 @@ def get_source(
                 target_func.body.pop()
         if strip_signature:
             body = target_func.body
-            out = unparse(body)
+            out = dedent(unparse(body))
         else:
             out = unparse(target_func)
     else:

@@ -92,4 +92,6 @@ def _get_source_2(src_file: str) -> tuple[str, str]:
 
 
 if __name__ == '__main__':
+    # pox plugins/embed_codeblock.py -h
+    # pox plugins/embed_codeblock.py pages/python/get-func-source.mdx --overwrite
     cli.run(main)

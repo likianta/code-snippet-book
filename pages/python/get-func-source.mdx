@@ -1,25 +1,40 @@
 # Get Function Source
 
-## Requirements
+## 方案 1
 
--   astunparse
+方案 1 使用 python 标准库 ast 来解析函数源码, 然后再用 astunparse 来反解析回去.
+
+优点:
+
+- 使用标准库
+- ast 修改比较方便
+
+缺点:
+
+- 源码中的注释会丢失
+- 代码格式可能会有变化 (例如, 一些不必要的换行可能会被去掉或折叠)
+
+### Requirements
+
+- astunparse
 
 optional (for test):
 
--   astpretty
--   lk-logger
+- astpretty
+- lk-logger
 
-## Code
+### Code
 
 `get_func_source.py`:
 
 {/* $py.embed_codeblock('./_assets/122928.py') */}
-{/* [BOT_MESSAGE] embed source file. updated at 2023-07-06 17:45:30 */}
+{/* [BOT_MESSAGE] embed source file. updated at 2023-07-15 14:35:19 */}
 
 ```py
 import ast
 import inspect
 import typing as t
+from textwrap import dedent
 from types import FunctionType
 
 from astunparse import unparse
@@ -57,7 +72,7 @@ def get_source(
                 target_func.body.pop()
         if strip_signature:
             body = target_func.body
-            out = unparse(body)
+            out = dedent(unparse(body))
         else:
             out = unparse(target_func)
     else:
@@ -67,7 +82,7 @@ def get_source(
 
 {/* $py.end */}
 
-## Test
+### Test
 
 ```py
 import lk_logger
@@ -105,3 +120,79 @@ if __name__ == '__main__':
 the output:
 
 ![](./_assets/120721.png "output")
+
+---
+
+## 方案 2
+
+方案 2 使用 libcst 来解析函数源码, 然后再用 libcst 来反解析回去.
+
+优点:
+
+- 保留源码的全部信息 (包括注释, 尾部空格, 自定义换行等)
+- tree 2 code 的操作很简单
+
+缺点:
+
+- 修改抽象树的操作比较麻烦
+- 网上资料比较少, 官方文档难读懂
+- 依赖第三方库
+
+### Requirements
+
+- libcst
+
+### Code
+
+{/* $py.embed_codeblock('./_assets/143108.py') */}
+{/* [BOT_MESSAGE] embed source file. updated at 2023-07-15 14:35:19 */}
+
+```py
+import inspect
+import typing as t
+from textwrap import dedent
+from types import FunctionType
+
+import libcst as cst
+
+
+def get_func_source(
+    func: FunctionType,
+    strip_decorators: bool = True,
+    strip_signature: bool = False,  # aka. body_only
+    strip_return: bool = False,
+) -> str:
+    body: cst.IndentedBlock
+    code: str
+    module: cst.Module
+    out: str
+    target_func: cst.FunctionDef
+    
+    code = dedent(inspect.getsource(func))
+    if strip_decorators or strip_signature:
+        module = cst.parse_module(code)
+        target_func = module.body[0]
+        if strip_decorators:
+            for d in target_func.decorators:
+                target_func = target_func.deep_remove(d)
+        if strip_return:
+            try:
+                return_node = target_func.body.body[-1].body[0]  # noqa
+            except IndexError:
+                pass
+            else:
+                if isinstance(return_node, cst.Return):
+                    target_func = target_func.deep_remove(return_node)
+        if strip_signature:
+            body = target_func.body
+            out = dedent(cst.Module([body]).code)
+        else:
+            out = cst.Module([target_func]).code
+        # the `out` should be definitely dedented.
+        assert not out.startswith('    ')
+    else:
+        out = code
+    return out.strip()
+```
+
+{/* $py.end */}
